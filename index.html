@@ -425,6 +425,35 @@ section { padding: 96px 0; }
 .filter-button.active, .filter-button:hover { background: var(--ink); color: var(--paper); border-color: var(--ink); }
 
 /* =========================================================
+   CATALOGUE / CATEGORIES
+========================================================= */
+.catalogue-section { position: relative; overflow: hidden; }
+.catalogue-section::before {
+  content: ""; position: absolute; width: 420px; height: 420px; right: -170px; top: 70px;
+  background: var(--clay); opacity: .045; border-radius: 50%; pointer-events:none;
+}
+.catalogue-header { margin-bottom: 26px; }
+.catalogue-categories {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;
+  padding: 7px; background: rgba(23,26,36,.055); border: 1px solid var(--border-soft);
+  border-radius: 18px; margin-bottom: 18px;
+}
+.category-tab {
+  position: relative; border: 1px solid transparent; background: transparent; color: var(--text-muted);
+  padding: 15px 17px; border-radius: 13px; text-align:left; display:flex; align-items:center;
+  justify-content:space-between; gap:12px; transition: .22s var(--ease);
+}
+.category-tab span { font-size: 12px; font-weight: 800; }
+.category-tab small { font-size: 9px; opacity:.7; white-space:nowrap; }
+.category-tab:hover { background: rgba(255,255,255,.55); color:var(--ink); }
+.category-tab.active { background: var(--ink); color: var(--paper); box-shadow: 0 8px 22px rgba(23,26,36,.12); }
+.category-tab.active small { color: var(--peach); opacity:1; }
+.catalogue-toolbar { display:flex; justify-content:space-between; align-items:center; margin-bottom:16px; padding: 0 3px; }
+#catalogueCount { font-size:11px; font-weight:800; text-transform:uppercase; letter-spacing:.7px; color:var(--clay-deep); }
+.catalogue-hint { font-size:11px; color:var(--text-muted); }
+.catalogue-grid { min-height: 260px; }
+
+/* =========================================================
    PRODUCTS
 ========================================================= */
 
@@ -931,6 +960,8 @@ footer { background: var(--ink); color: var(--bone); padding: 60px 0 0; }
 }
 
 @media (max-width: 800px) {
+  .catalogue-categories { grid-template-columns: repeat(2, 1fr); }
+  .catalogue-hint { display:none; }
   .container { width: calc(100% - 28px); }
   section { padding: 72px 0; }
   .nav-links, .nav-whatsapp { display: none; }
@@ -1481,15 +1512,13 @@ O<span>'couloir</span>
 
 <nav class="nav-links">
 <a href="#accueil">Accueil</a>
-<a href="#hauts">Hauts</a>
-<a href="#bas">Bas</a>
+<a href="#catalogue">Catalogue</a>
 <a href="#accessoires">Accessoires</a>
 <a href="#faq">FAQ</a>
 <a href="#contact">Contact</a>
 </nav>
 
 <div class="header-actions">
-<a href="https://wa.me/2250787593517" target="_blank" rel="noopener" class="nav-whatsapp">WhatsApp</a>
 <button class="cart-button" id="cartButton" aria-label="Ouvrir le panier">
 Panier
 <span class="cart-count" id="cartCount">0</span>
@@ -1520,7 +1549,7 @@ vêtements seconde main un par un — matière, coupe, caractère — pour
 celles et ceux qui préfèrent porter autrement.
 </p>
 <div class="hero-actions">
-<a href="#hauts" class="btn btn-primary">Découvrir nos pièces</a>
+<a href="#catalogue" class="btn btn-primary">Découvrir nos pièces</a>
 <a href="#comment-commander" class="btn btn-outline">Comment commander ?</a>
 </div>
 </div>
@@ -1558,72 +1587,39 @@ celles et ceux qui préfèrent porter autrement.
 </section>
 
 <!-- =========================================================
-     HAUTS
+     CATALOGUE / CATEGORIES
 ========================================================= -->
-<section id="hauts">
+<section id="catalogue" class="catalogue-section">
 <div class="container">
 
-<div class="section-header">
-<div>
-<span class="eyebrow"><span class="eyebrow-dot"></span>Voir les hauts</span>
-<h2 class="section-title">Hauts</h2>
-</div>
-<p class="section-description">Hoodies, chemises et vestes sélectionnés avec soin pour compléter votre garde-robe.</p>
-</div>
-
-<div class="filters" id="hautsFilters"></div>
-<div class="product-grid" id="hautsGrid"></div>
-
-</div>
-</section>
-
-<!-- =========================================================
-     BAS
-========================================================= -->
-<section id="bas" style="background: var(--paper);">
-<div class="container">
-
-<div class="section-header">
-<div>
-<span class="eyebrow"><span class="eyebrow-dot"></span>Voir les bas</span>
-<h2 class="section-title">Bas</h2>
-</div>
-<p class="section-description">Pantalons et bas de toutes les silhouettes pour trouver la pièce qui vous correspond.</p>
-</div>
-
-<div class="catalog-toolbar catalog-toolbar--simple">
-      <span class="catalog-count" id="basCount">Pantalons &amp; denim sélectionnés</span>
-    </div>
-    <div class="product-grid" id="basGrid"></div>
-
-</div>
-</section>
-
-<section id="accessoires">
-  <div class="container">
-    <div class="section-header">
-      <div>
-        <span class="eyebrow"><span class="eyebrow-dot"></span>Les détails</span>
-        <h2 class="section-title">Accessoires</h2>
-      </div>
-      <p class="section-description">Les petites pièces qui donnent du caractère à une silhouette, sans en faire trop.</p>
-    </div>
-    <div class="product-grid" id="accessoiresGrid"></div>
+<div class="section-header catalogue-header">
+  <div>
+    <span class="eyebrow"><span class="eyebrow-dot"></span>La sélection O'couloir</span>
+    <h2 class="section-title">Nos pièces</h2>
   </div>
-</section>
+  <p class="section-description">Découvrez toute la sélection, puis choisissez simplement la catégorie qui vous intéresse.</p>
+</div>
 
-<section class="editorial-manifesto">
-  <div class="container manifesto-inner">
-    <div>
-      <span class="manifesto-label">Le regard O'couloir</span>
-      <h2 class="manifesto-title">Moins de bruit.<br>Plus de caractère.</h2>
-    </div>
-    <div class="manifesto-copy">
-      <p>Nous ne cherchons pas à remplir une boutique. Nous cherchons <strong>la bonne pièce</strong> — celle qui possède une coupe, une matière ou une présence qui mérite d'être remarquée.</p>
-      <div class="manifesto-rule"></div>
-      <div class="manifesto-meta"><span>Seconde main</span><span>Éditions limitées</span><span>Abidjan</span></div>
-    </div>
-  </div>
+<div class="catalogue-categories" role="tablist" aria-label="Catégories de vêtements">
+  <button class="category-tab active" data-category="all" role="tab" aria-selected="true">
+    <span>Tous les articles</span><small>12 pièces</small>
+  </button>
+  <button class="category-tab" data-category="Hauts" role="tab" aria-selected="false">
+    <span>Hauts</span><small>8 pièces</small>
+  </button>
+  <button class="category-tab" data-category="Bas" role="tab" aria-selected="false">
+    <span>Bas</span><small>3 pièces</small>
+  </button>
+</div>
+
+<div class="catalogue-toolbar">
+  <span id="catalogueCount">12 pièces</span>
+  <span class="catalogue-hint">Tous les articles sont affichés par défaut</span>
+</div>
+
+<div class="product-grid catalogue-grid" id="catalogueGrid"></div>
+
+</div>
 </section>
 
 <!-- =========================================================
@@ -1769,8 +1765,7 @@ O<span>'couloir</span>
 <div class="footer-column">
 <h4>Navigation</h4>
 <a href="#accueil">Accueil</a>
-<a href="#hauts">Hauts</a>
-<a href="#bas">Bas</a>
+<a href="#catalogue">Catalogue</a>
 <a href="#accessoires">Accessoires</a>
 <a href="#faq">FAQ</a>
 </div>
@@ -1944,7 +1939,7 @@ const products = [
 ];
 
 let cart = JSON.parse(localStorage.getItem("ocouloir-cart") || "[]");
-let hautsFilter = "Tous";
+let activeCategory = "all";
 let searchTerm = "";
 let sortMode = "featured";
 let favorites = JSON.parse(localStorage.getItem("ocouloir-favorites") || "[]").map(Number);
@@ -1959,26 +1954,29 @@ function formatPrice(price) {
 }
 
 /* =========================================================
-   FILTRES HAUTS
+   CATEGORIES
 ========================================================= */
-
-const hautsCategories = ["Tous", "Hoodies", "Chemises", "Vestes"];
-
-function renderFilters() {
-  const wrap = document.getElementById("hautsFilters");
-  wrap.innerHTML = "";
-  hautsCategories.forEach(cat => {
-    const btn = document.createElement("button");
-    btn.className = "filter-button" + (cat === hautsFilter ? " active" : "");
-    btn.textContent = cat;
-    btn.addEventListener("click", () => {
-      hautsFilter = cat;
-      renderFilters();
-      displayProductsInGrid("hautsGrid", hautsFilter === "Tous" ? ["Hoodies","Chemises","Vestes"] : [hautsFilter]);
+const categoryTabs = document.querySelectorAll(".category-tab");
+const categoryCounts = {
+  all: products.length,
+  Hauts: products.filter(p => ["Hoodies", "Chemises", "Vestes"].includes(p.category)).length,
+  Bas: products.filter(p => p.category === "Pantalons").length
+};
+document.querySelectorAll(".category-tab").forEach(tab => {
+  const small = tab.querySelector("small");
+  if (small) small.textContent = `${categoryCounts[tab.dataset.category]} pièces`;
+});
+categoryTabs.forEach(tab => {
+  tab.addEventListener("click", () => {
+    activeCategory = tab.dataset.category;
+    categoryTabs.forEach(t => {
+      const active = t === tab;
+      t.classList.toggle("active", active);
+      t.setAttribute("aria-selected", active ? "true" : "false");
     });
-    wrap.appendChild(btn);
+    updateCatalogue();
   });
-}
+});
 
 /* =========================================================
    AFFICHAGE PRODUITS
@@ -2060,20 +2058,47 @@ function displayProductsInGrid(gridId, categories) {
 
   requestAnimationFrame(initReveal);
 }
-function updateAllGrids() {
-  displayProductsInGrid("hautsGrid", hautsFilter === "Tous" ? ["Hoodies","Chemises","Vestes"] : [hautsFilter]);
-  displayProductsInGrid("basGrid", ["Pantalons"]);
-  displayProductsInGrid("accessoiresGrid", ["Accessoires"]);
-  const basCount = document.getElementById("basCount");
-  if (basCount) {
-    const n = products.filter(p => p.category === "Pantalons").length;
-    basCount.textContent = `${n} pièces · sélection O'couloir`;
+function updateCatalogue() {
+  const categoryMap = {
+    all: null,
+    Hauts: ["Hoodies", "Chemises", "Vestes"],
+    Bas: ["Pantalons"]
+  };
+  const categories = categoryMap[activeCategory];
+  const grid = document.getElementById("catalogueGrid");
+  if (!grid) return;
+
+  displayProductsInGrid(
+    "catalogueGrid",
+    categories || products.map(product => product.category)
+  );
+
+  const visibleCount = products.filter(product =>
+    !categories || categories.includes(product.category)
+  ).length;
+  const count = document.getElementById("catalogueCount");
+  if (count) {
+    count.textContent = `${visibleCount} pièce${visibleCount > 1 ? "s" : ""}`;
   }
+
+  const hint = document.querySelector(".catalogue-hint");
+  if (hint) {
+    hint.textContent = activeCategory === "all"
+      ? "Toute la sélection est affichée"
+      : `Sélection : ${activeCategory}`;
+  }
+
   updateFavoriteCount();
 }
 
+// Compatibilité avec les anciennes actions du panier/favoris.
+function updateAllGrids() {
+  updateCatalogue();
+}
+
+
 renderFilters();
-updateAllGrids();
+updateCatalogue();
 
 function updateFavoriteCount() {
   const count = document.getElementById("favoriteCount");
@@ -2091,7 +2116,7 @@ function toggleFavorite(productId) {
   }
   localStorage.setItem("ocouloir-favorites", JSON.stringify(favorites));
   updateFavoriteCount();
-  updateAllGrids();
+  updateCatalogue();
 }
 
 document.getElementById("favoriteButton")?.addEventListener("click", () => {
@@ -2104,7 +2129,7 @@ document.getElementById("favoriteButton")?.addEventListener("click", () => {
   document.getElementById("favoriteButton").setAttribute("aria-pressed", favoritesOnly);
   document.getElementById("hauts")?.scrollIntoView({ behavior: "smooth", block: "start" });
   showToast(favoritesOnly ? "Affichage de vos favoris" : "Retour à toute la sélection");
-  updateAllGrids();
+  updateCatalogue();
 });
 
 function resetCatalog() {
@@ -2119,17 +2144,17 @@ function resetCatalog() {
   if (search) search.value = "";
   if (sort) sort.value = "featured";
   renderFilters();
-  updateAllGrids();
+  updateCatalogue();
 }
 
 document.getElementById("productSearch")?.addEventListener("input", e => {
   searchTerm = e.target.value;
-  updateAllGrids();
+  updateCatalogue();
 });
 
 document.getElementById("productSort")?.addEventListener("change", e => {
   sortMode = e.target.value;
-  updateAllGrids();
+  updateCatalogue();
 });
 
 /* =========================================================
@@ -2200,14 +2225,14 @@ function addToCart(productId) {
 
   showToast(`${product.name} ajouté au panier`);
   updateCart();
-  updateAllGrids();
+  updateCatalogue();
 }
 
 function removeFromCart(productId) {
   cart = cart.filter(item => item.id !== productId);
   localStorage.setItem("ocouloir-cart", JSON.stringify(cart));
   updateCart();
-  updateAllGrids();
+  updateCatalogue();
 }
 
 function changeQuantity(productId, amount) {
@@ -2237,7 +2262,7 @@ function updateCart() {
     cartItems.innerHTML = `
       <div class="empty-cart">
         <p>Votre panier est encore vide.</p>
-        <a href="#hauts" onclick="closeCart()" class="btn btn-primary">Découvrir les pièces</a>
+        <a href="#catalogue" onclick="closeCart()" class="btn btn-primary">Découvrir les pièces</a>
       </div>`;
   } else {
     cartItems.innerHTML = "";
